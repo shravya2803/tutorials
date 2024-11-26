@@ -1,20 +1,37 @@
-#include<stdio.h>
-#include<math.h>
-void main()
-{
-    double x1,x2,n1,n2,num1=0,num2=0,num;
-    scanf("%lf",&n1);
-    for(int i=n1-1;i>=0;i--)
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Student {
+    int rollNo;
+    char name[50];
+    char branch[50];
+    float cgpa;
+};
+
+int main() {
+    FILE *file ;
+    if(file==NULL)
     {
-        scanf("%lf",&x1);
-        num1 =num1+(x1*pow(16,i));
+        file = fopen("LNMIITSTUDENT.DAT", "w");
     }
-    scanf("%lf",&n2);
-    for(int j=1;j<=n2;j++)
+    else
     {
-        scanf("%lf",&x2);
-        num2 =num2+(x2/pow(16,j));
+    file = fopen("LNMIITSTUDENT.DAT", "a");
     }
-    num=num1+num2;
-    printf("%lf",num);
+    struct Student student;
+    printf("Enter roll number: ");
+    scanf("%d", &student.rollNo);
+    printf("Enter name: ");
+    scanf("%s", student.name);
+    printf("Enter branch: ");
+    scanf("%s", student.branch);
+    printf("Enter CGPA: ");
+    scanf("%f", &student.cgpa);
+
+    fwrite(&student, sizeof(struct Student), 1, file);
+
+    printf("Information added successfully.\n");
+
+    fclose(file);
+    return 0;
 }

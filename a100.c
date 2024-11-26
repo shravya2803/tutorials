@@ -1,39 +1,34 @@
 #include<stdio.h>
+
 int main()
 {
-    int a,b,k=0,j=0,sum1=0,sum2=0;
-    scanf("%d",&a);
-    scanf("%d",&b);
-    int arr[a];
-    int arr2[b];
-    for(int i=1;i<a;i++)
+    FILE *fp ;
+    int count;
+    fp = fopen("LNMITSTUDENT.java","r");
+     int n ;
+    printf("Enter the no of studentsyou want to enter the file\n");
+    scanf("%d",&n);
+    if(fp==NULL)
     {
-        if (a%i==0)
-        {
-            arr[k]=i;
-            k++;
-        }
+        fp = fopen("LNMITSTUDENT.java","w+");
+         count = 1;
     }
-    for(int i=1;i<b;i++)
+    else
     {
-        if (b%i==0)
-        {
-            arr2[j]=i;
-            j++;
-        }
+        fp = fopen("LNMITSTUDENT.java","a");
+        count = fscanf(fp,"%d",fp[0]);
     }
-    for(int i=0;i<k;i++)
+   
+    char name[30];
+    for( int i=0;i<n;i++)
     {
-        sum1=sum1+arr[i];
+        printf("Enter the name of student %d\n",count);
+        scanf("%s",name);
+        
+        fprintf(fp,"Name of student is %s\n",name);
+        fprintf(fp,"Roll no of student is %d\n",count);
+        count++;
     }
-    for(int i=0;i<j;i++)
-    {
-        sum2=sum2+arr2[i];
-    }
-    printf("%d\n%d\n",sum1,sum2);
-    if((sum1/a)==(sum2/b))
-    {
-        printf("friend\n");
-    }
+    fclose(fp);
     return 0;
 }
